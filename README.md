@@ -1,3 +1,13 @@
 # API REST de perfiles - Codigo fuente
 
-Creo que se entiende con el título...
+## Comandos para iniciar vagrant
+'''
+vagrant up
+vagrant ssh
+'''
+
+## Comando para activar entorno virtual
+
+'''
+source ~/env/bin/activate
+'''
