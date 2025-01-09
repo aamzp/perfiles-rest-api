@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser # AbstractBaseUser is a class that implements the Django User model
 from django.contrib.auth.models import PermissionsMixin # PermissionsMixin is a class that implements the Django User model
 from django.contrib.auth.models import BaseUserManager # BaseUserManager is a class that implements the Django User model   
+from django.conf import settings
+
 
 ''' Creación de modelos de base de datos '''
 
@@ -56,3 +58,16 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         '''Devuelve cadena representando nuestro usuario'''
         return self.email
+    
+class ProfileFeedItem(models.Model):
+    '''Perfil de status actualizado'''
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    status_text = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        '''Devuelve la representación del modelo en string'''
+        return self.status_text
