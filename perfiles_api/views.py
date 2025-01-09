@@ -4,6 +4,9 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import filters
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.settings import api_settings
+
 
 from perfiles_api import serializers
 from perfiles_api import models
@@ -108,3 +111,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.UpdateOwnProfile,) # Permisos de actualización de perfil
     filter_backends = (filters.SearchFilter,) # Filtro de búsqueda
     search_fields = ('name', 'email',) # Campos de búsqueda
+
+class UserLoginApiView(ObtainAuthToken):
+    """Maneja la creación de tokens de autenticación"""
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES # Renderiza la respuesta
